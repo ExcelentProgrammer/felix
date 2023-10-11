@@ -9,14 +9,16 @@ class ProductHelper
 
     /**
      * @author Azamov Samandar
-     * Maxsulotga ketadigan materiallarni hisoblab bekrish uchun
+     * Maxsulotga ketadigan materiallarni hisoblab berish uchun
      */
     static public function getTotalMaterials($TotalMaterials, $count): array
     {
         $materials = [];
         for ($i = 1; $i <= $count; $i++) {
             foreach ($TotalMaterials as $item) {
-                !isset($materials[$item['material']['name']]) ? $materials[$item->material->name] = $item->quantity : $materials[$item->material->name] += $item->quantity;
+                !isset($materials[$item['material']['name']]) ?
+                    $materials[$item->material->name] = $item->quantity :
+                    $materials[$item->material->name] += $item->quantity;
             }
         }
         return [

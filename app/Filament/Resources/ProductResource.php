@@ -24,8 +24,8 @@ class ProductResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make("name")->maxLength(255),
-                TextInput::make("code")->numeric()->unique(),
+                TextInput::make("name")->maxLength(255)->required(),
+                TextInput::make("code")->numeric()->unique()->required(),
             ]);
     }
 

@@ -26,7 +26,7 @@ class ProductMaterialResource extends Resource
                 Select::make('product_id')
                     ->relationship('product', 'name')->preload()->required(),
                 Select::make("material_id")->relationship("material", "name")->required(),
-                TextInput::make("quantity")->numeric()->maxValue(999999999)
+                TextInput::make("quantity")->numeric()->maxValue(999999999)->required()
             ]);
     }
 
