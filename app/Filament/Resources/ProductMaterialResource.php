@@ -25,7 +25,7 @@ class ProductMaterialResource extends Resource
             ->schema([
                 Select::make('product_id')
                     ->relationship('product', 'name')->preload()->required(),
-                Select::make("material_id")->relationship("material", "name")->required()->unique(),
+                Select::make("material_id")->relationship("material", "name")->required(),
                 TextInput::make("quantity")->numeric()
             ]);
     }

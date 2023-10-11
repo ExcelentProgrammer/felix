@@ -36,7 +36,7 @@ class BaseController extends Controller
                 return $i->product->code == $item->code;
             }); // Maxsulotga tegishli materiallerni filter qilish uchun
 
-            $TotalMaterials[$product->name] = ProductHelper::getTotalMaterials($materials, $item->count); // Barcha maxsulotlarga ketadigan materialler
+            $TotalMaterials[$product->name] = ProductHelper::getTotalMaterials($materials, $item->count); // Barcha maxsulotlarga ketadigan materiallar
         }
 
         $response = ProductHelper::getProductsMaterials($TotalMaterials, $Warehouses); // Maxsulotlarga ketadigan barcha materillarni xisoblab berish uchun
