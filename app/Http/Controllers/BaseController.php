@@ -9,12 +9,12 @@ use App\Http\Resources\WarehouseResource;
 use App\Models\Product;
 use App\Models\ProductMaterial;
 use App\Models\Warehouse;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Response;
-use LDAP\Result;
 
 class BaseController extends Controller
 {
-    function index(ProductRequest $request): \Illuminate\Http\JsonResponse
+    function index(ProductRequest $request): JsonResponse
     {
 
         $products = json_decode($request->input("products"));
@@ -27,7 +27,7 @@ class BaseController extends Controller
 
         foreach ($products as $item) {
             $product = Product::where(['code' => $item->code]); // maxsulot
-            
+
             if (!$product->exists()) continue; // Agar Maxsulot topilmasa keyingi maxsulotga o'tib ketadi
 
             $product = $product->get()->first();

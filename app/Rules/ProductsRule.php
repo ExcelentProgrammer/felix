@@ -13,19 +13,20 @@ class ProductsRule implements ValidationRule
     /**
      * Run the validation rule.
      *
-     * @param  \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString  $fail
+     * @param \Closure(string): \Illuminate\Translation\PotentiallyTranslatedString $fail
      */
 
-    static function error($message){
+    static function error($message)
+    {
         throw new HttpResponseException(Response::json([
-            "success"=>false,
-            "message"=>$message
+            "success" => false,
+            "message" => $message
         ]));
     }
 
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        $value = json_decode($value,true);
+        $value = json_decode($value, true);
         if (!is_array($value)) {
             self::error("The list of products must be an array");
         }
@@ -36,6 +37,6 @@ class ProductsRule implements ValidationRule
                 self::error("Array contains code and count");
             }
         }
-    
+
     }
 }

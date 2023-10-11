@@ -20,7 +20,7 @@ class Warehouse extends Model
 
     function material(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Material::class,"material_id");
+        return $this->belongsTo(Material::class, "material_id");
     }
 
 }

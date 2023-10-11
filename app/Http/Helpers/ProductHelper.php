@@ -39,7 +39,7 @@ class ProductHelper
 
                 foreach ($Warehouses as $Warehouse) {
                     if ($Warehouse->material->name == $material_name and $Warehouse->remainder != 0) {
-                        $qty = 0; // maxsulot bitta partiyadan qancha material olganini 
+                        $qty = 0; // maxsulot bitta partiyadan qancha material olganini
 
                         if ($Warehouse->remainder >= $material_count) {
                             $Warehouse->remainder -= $material_count;
@@ -53,7 +53,7 @@ class ProductHelper
                         $product_materials[] = [
                             "warehouse_id" => $Warehouse->id,
                             "material_name" => $material_name,
-                            "qty" => (int) number_format($qty, 0),
+                            "qty" => (int)number_format($qty, 0),
                             "price" => $Warehouse->price
                         ];
 
@@ -64,7 +64,7 @@ class ProductHelper
                     $product_materials[] = [
                         "warehouse_id" => null,
                         "material_name" => $material_name,
-                        "qty" => (int) $material_count,
+                        "qty" => (int)$material_count,
                         "price" => null
                     ];
                 }

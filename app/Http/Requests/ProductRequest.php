@@ -4,10 +4,10 @@ namespace App\Http\Requests;
 
 use App\Rules\JsonValidatorRule;
 use App\Rules\ProductsRule;
+use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProductRequest extends FormRequest
 {
@@ -37,12 +37,12 @@ class ProductRequest extends FormRequest
     /**
      * Get the validation rules that apply to the request.
      *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * @return array<string, ValidationRule|array<mixed>|string>
      */
     public function rules(): array
     {
         return [
-            "products" => ["required","json",new ProductsRule],   
+            "products" => ["required", "json", new ProductsRule],
         ];
     }
 }

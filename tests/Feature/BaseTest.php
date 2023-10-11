@@ -6,15 +6,26 @@ use Tests\TestCase;
 
 class BaseTest extends TestCase
 {
+
+    public $data = [
+        "products" => '[
+            {
+                "code": 1,
+                "count": 30
+            },
+            {
+                "code": 2,
+                "count": 20
+            }
+        ]
+        '
+    ];
     /**
      * Response status test
      */
     public function test_info(): void
     {
-        $response = $this->post('api/info/', [
-            "dress" => 30,
-            "pants" => 20,
-        ]);
+        $response = $this->post('api/info/', $this->data);
         $response->assertStatus(200);
     }
 
@@ -25,10 +36,8 @@ class BaseTest extends TestCase
     public function test_json_structure()
     {
 
-        $response = $this->post('api/info/', [
-            "dress" => 30,
-            "pants" => 20,
-        ]);
+        $response = $this->post('api/info/', $this->data);
+
 
         $response->assertJsonIsArray(); // Is Array
         $response->assertJsonStructure([
@@ -53,10 +62,8 @@ class BaseTest extends TestCase
      */
     public function test_is_array()
     {
-        $response = $this->post('api/info/', [
-            "dress" => 30,
-            "pants" => 20,
-        ]);
+        $response = $this->post('api/info/', $this->data);
+
         $response->assertJsonIsArray(); // Is Array
     }
 
@@ -66,10 +73,8 @@ class BaseTest extends TestCase
      */
     public function test_json()
     {
-        $response = $this->post('api/info/', [
-            "dress" => 30,
-            "pants" => 20,
-        ]);
+        $response = $this->post('api/info/', $this->data);
+
         $response->assertJson([
             [
                 "product_name" => "Ko'ylak",

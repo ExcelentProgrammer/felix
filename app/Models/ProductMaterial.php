@@ -21,7 +21,7 @@ class ProductMaterial extends Model
 
     function product(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Product::class,"product_id");
+        return $this->belongsTo(Product::class, "product_id");
     }
 
     function material(): \Illuminate\Database\Eloquent\Relations\BelongsTo
