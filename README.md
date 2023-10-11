@@ -11,6 +11,7 @@ admin panel
 - Test yozilgan
 - Admin panel Filamentphp ishlatilgan<br>
 - Resourcelardan Foydalanilgan<br>
+- Seeder yozilgan<br>
 - Form Request va Custom rule foydalanilgan<br>
 - qo'shimcha imkoniyat faqat Ko'ylak va shim emas hohlagancha maxsulot qo'shsa bo'ladi
 
