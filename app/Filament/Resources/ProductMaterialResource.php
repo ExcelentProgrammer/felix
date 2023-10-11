@@ -43,6 +43,7 @@ class ProductMaterialResource extends Resource
                 Tables\Filters\SelectFilter::make('material')->relationship('material', 'name')
             ])
             ->actions([
+                Tables\Actions\ViewAction::make(),
                 Tables\Actions\EditAction::make(),
 
             ])
