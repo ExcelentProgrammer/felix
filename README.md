@@ -16,7 +16,10 @@ admin panel
 
 ## Post paramsdagi code va count
 - code: maxsulot codi
-- count: nechta maxsulot kerak ekanligi
+- count: nechta maxsulot kerak ekanligi 
+
+## Eslatma !!!
+- Composer install qilinganda xatolik bo'lishi mumkun filamentphp ishlashi uchun php intl extension yoqilgan bo'lishi kerak
 
 ## Foydalanish
 ```php
