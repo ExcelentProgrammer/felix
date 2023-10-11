@@ -39,15 +39,18 @@ class ProductMaterialResource extends Resource
                 TextColumn::make("quantity")
             ])
             ->filters([
-                //
+                Tables\Filters\SelectFilter::make('product')->relationship('product', 'name'),
+                Tables\Filters\SelectFilter::make('material')->relationship('material', 'name')
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
+
             ]);
     }
 
