@@ -6,38 +6,43 @@ use App\Http\Helpers\ProductHelper;
 use App\Http\Requests\ProductRequest;
 use App\Http\Resources\ProductMaterialResource;
 use App\Http\Resources\WarehouseResource;
+use App\Models\Product;
 use App\Models\ProductMaterial;
 use App\Models\Warehouse;
 use Illuminate\Support\Facades\Response;
+use LDAP\Result;
 
 class BaseController extends Controller
 {
     function index(ProductRequest $request): \Illuminate\Http\JsonResponse
     {
 
-        $dress = (int)$request->post("dress", 0); // Nechta Ko'ylak kerak ekanligi
-        $pants = (int)$request->post("pants", 0); // Nechta Shim kerak ekanligi
+        $products = json_decode($request->input("products"));
 
         $ProductMaterials = ProductMaterialResource::collection(ProductMaterial::all());
         $Warehouses = WarehouseResource::collection(Warehouse::all()->values()); // Ombordagi maxsulotlar (array)
 
 
-        $DressMaterials = $ProductMaterials->filter(function ($item) {
-            return $item->product->code == 1;
-        });  // Ko'ylak uchun kerakli materiallar
+        $TotalMaterials = []; // Jami kerakli maxsulotlar
 
-        $PantsMaterials = $ProductMaterials->filter(function ($item) {
-            return $item->product->code == 2;
-        }); // Shim uchun kerakli materiallar
+        foreach ($products as $item) {
+            $product = Product::where(['code' => $item->code]); // maxsulot
+            
+            if (!$product->exists()) continue; // Agar Maxsulot topilmasa keyingi maxsulotga o'tib ketadi
 
+            $product = $product->get()->first();
 
-        $TotalMaterials = [
-            "Ko'ylak" => ProductHelper::getTotalMaterials($DressMaterials, $dress),
-            "Shim" => ProductHelper::getTotalMaterials($PantsMaterials, $pants),
-        ]; // Jami kerakli maxsulotlar
+            $materials = $ProductMaterials->filter(function ($i) use ($item) {
+                return $i->product->code == $item->code;
+            }); // Maxsulotga tegishli materiallerni filter qilish uchun
+
+            $TotalMaterials[$product->name] = ProductHelper::getTotalMaterials($materials, $item->count); // Barcha maxsulotlarga ketadigan materialler
+        }
 
         $response = ProductHelper::getProductsMaterials($TotalMaterials, $Warehouses); // Maxsulotlarga ketadigan barcha materillarni xisoblab berish uchun
 
         return Response::json($response);
     }
 }
+
+

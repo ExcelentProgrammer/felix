@@ -2,9 +2,12 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\JsonValidatorRule;
+use App\Rules\ProductsRule;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Http\Exceptions\HttpResponseException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ProductRequest extends FormRequest
 {
@@ -39,8 +42,8 @@ class ProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "dress" => ["int"],
-            "pants" => ["int"]
+            "products" => ["required","json",new ProductsRule],   
         ];
     }
 }
+
